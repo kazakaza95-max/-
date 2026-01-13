@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>焼津ブルースバンド“枯山水” | ブルース・リュー</title>
+    <meta name="description" content="焼津ブルースバンド“枯山水” ブルース・リューのポートフォリオサイト。こころをほぐす音楽をあなたに。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (Lightweight icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            /* Colors defined in prompt */
+            --color-primary: #2C3E50; /* Dark Blue */
+            --color-accent: #E74C3C;  /* Red */
+            --color-bg-light: #ECF0F1; /* Light Gray (Fixed typo from ECFOF1) */
+            --color-white: #ffffff;
+            --color-text-main: #2C3E50;
+            --color-text-light: #7f8c8d;
+            
+            /* Theme Variables (Default Light) */
+            --bg-body: var(--color-bg-light);
+            --bg-card: var(--color-white);
+            --text-body: var(--color-text-main);
+            --text-muted: var(--color-text-light);
+            --border-color: rgba(44, 62, 80, 0.1);
+            --nav-bg: rgba(236, 240, 241, 0.95);
+            --hero-overlay: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.7));
+            
+            /* Spacing & Layout */
+            --container-width: 1100px;
+            --header-height: 70px;
+            --radius-md: 8px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- Dark Mode Overrides --- */
+        [data-theme="dark"] {
+            --bg-body: #1a252f;
+            --bg-card: #2C3E50;
+            --text-body: #ECF0F1;
+            --text-muted: #bdc3c7;
+            --border-color: rgba(236, 240, 241, 0.1);
+            --nav-bg: rgba(26, 37, 47, 0.95);
+            --hero-overlay: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 30, 40, 0.9));
+        }
+
+        /* --- Reset & Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--color-white);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--color-primary);
+        }
+
+        /* --- Animation --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-body);
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-body);
+            font-size: 1.5rem;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            color: var(--color-accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-body);
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background: var(--hero-overlay), url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iIzJDM0U1MCIvPjxjaXJjbGUgY3g9IjQwMCIgY3k9IjMwMCIgcj0iMjAwIiBmaWxsPSIjMzQ0OTVFIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=') no-repeat center center/cover;
+            /* Using a simple SVG data URI as placeholder background to ensure single-file reliability */
+        }
+
+        .hero-content {
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--bg-card);
+            box-shadow: var(--shadow-md);
+            background-color: #ddd;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            padding: 6px 16px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        [data-theme="dark"] .tag {
+            background-color: #34495e;
+        }
+
+        /* --- Activities Section --- */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .card.special {
+            border-top-color: var(--color-accent);
+            background: linear-gradient(to bottom right, var(--bg-card), rgba(231, 76, 60, 0.05));
+        }
+
+        /* --- Contact Section --- */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-text h3 {
+                margin-top: 20px;
+            }
+
+            .tag-container {
+                justify-content: center;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--nav-bg);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                text-align: center;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">枯山水<span>.</span></a>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">自己紹介</a></li>
+                    <li><a href="#activities">活動内容</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <button class="theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="メニュー">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>焼津ブルースバンド<br>“枯山水”</h1>
+            <p>こころをほぐす音楽をあなたに</p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn btn-primary">自己紹介を見る</a>
+                <a href="#activities" class="btn btn-primary">活動内容を見る</a>
+                <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">自己紹介</h2>
+            <div class="about-grid">
+                <div class="profile-img-container fade-in-up">
+                    <!-- Placeholder SVG for Profile Image (Casual Male Illustration) -->
+                    <svg class="profile-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="background: #e0e6ed;">
+                        <circle cx="100" cy="100" r="100" fill="#ECF0F1"/>
+                        <circle cx="100" cy="85" r="35" fill="#2C3E50"/>
+                        <path d="M100 130 C 60 130, 30 170, 30 200 L 170 200 C 170 170, 140 130, 100 130" fill="#2C3E50"/>
+                        <!-- Glasses -->
+                        <path d="M80 85 L120 85" stroke="#E74C3C" stroke-width="2"/>
+                        <circle cx="85" cy="85" r="10" stroke="#E74C3C" stroke-width="2" fill="none"/>
+                        <circle cx="115" cy="85" r="10" stroke="#E74C3C" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <div class="about-text fade-in-up">
+                    <h3>はじめまして、<br>枯山水のブルース・リューです。</h3>
+                    <p>
+                        仕事は整体師をやっています。普段は身体をほぐすお手伝いをしていますが、休日は音楽を通して、皆さんの心をほぐす活動をしています。
+                    </p>
+                    <p>
+                        焼津の風土と音楽を愛し、地元の皆様に寄り添う演奏を心がけています。整体で培った「人を癒やす」精神を、音楽という形に変えてお届けします。
+                    </p>
+                    <div class="tag-container">
+                        <span class="tag">オリジナル曲</span>
+                        <span class="tag">ブルース</span>
+                        <span class="tag">フォークソング</span>
+                        <span class="tag">昭和歌謡</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="section" style="background-color: var(--bg-body);">
+        <div class="container">
+            <h2 class="section-title fade-in-up">活動内容</h2>
+            <div class="activities-grid">
+                <!-- Regular Live -->
+                <div class="card fade-in-up">
+                    <div class="card-icon">
+                        <i class="ph ph-guitar"></i>
+                    </div>
+                    <h3>定例ライブ</h3>
+                    <p><strong>毎月第2日曜日 15:00〜</strong></p>
+                    <p style="margin-top: 10px;">
+                        1時間のライブを開催しています。<br>
+                        ふらっと立ち寄って、午後のひとときを音楽と共に過ごしませんか？
+                    </p>
+                </div>
+
+                <!-- Special Event -->
+                <div class="card special fade-in-up">
+                    <div class="card-icon">
+                        <i class="ph ph-confetti"></i>
+                    </div>
+                    <h3>イベントライブ</h3>
+                    <p><strong>毎年 6月 & 12月</strong></p>
+                    <p style="margin-top: 10px;">
+                        他バンドと共に開催するスペシャルライブ。<br>
+                        特に12月はクリスマスライブとして、にぎやかにお届けします！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">お問い合わせ</h2>
+            <div class="contact-container fade-in-up">
+                <p class="contact-intro">ご相談はお気軽にどうぞ。<br>遅くても翌日までには返信いたします。</p>
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。送信されました。（デモ機能）');">
+                    <div class="form-group">
+                        <label for="name">お名前</label>
+                        <input type="text" id="name" class="form-control" required placeholder="例：焼津 太郎">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" class="form-control" required placeholder="例：example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">お問い合わせ内容</label>
+                        <textarea id="message" class="form-control" required placeholder="演奏依頼やご質問など、お書きください。"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">送信する</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 枯山水 - Blues Liu. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Theme Toggle ---
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        const html = document.documentElement;
+        
+        // Check saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                icon.classList.replace('ph-moon', 'ph-sun');
+            } else {
+                icon.classList.replace('ph-sun', 'ph-moon');
+            }
+        }
+
+        // --- Mobile Menu ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const links = navLinks.querySelectorAll('a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.replace('ph-list', 'ph-x');
+            } else {
+                icon.classList.replace('ph-x', 'ph-list');
+            }
+        });
+
+        // Close menu when clicking a link
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('ph-x', 'ph-list');
+            });
+        });
+
+        // --- Scroll Animation (Intersection Observer) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
